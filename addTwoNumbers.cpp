@@ -11,33 +11,37 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* l3 = new ListNode();
-        ListNode* l4 = new ListNode();
+        int l1val = 0, l2val = 0;
+        ListNode* l5 = new ListNode();
         int multiplyer = 1;
         
         while (l1 != nullptr) {
-            l3->val += l1->val * multiplyer;
+            l1val += l1->val * multiplyer;
             multiplyer = multiplyer * 10;
             l1 = l1->next;
         }
         multiplyer = 1;
         while (l2 != nullptr) {
-            l4->val += l2->val * multiplyer;
+            l2val += l2->val * multiplyer;
             multiplyer = multiplyer * 10;
             l2 = l2->next;
         }
-        int test = l3->val + l4->val;
-        ListNode* l5 = new ListNode(test % 10);
-        test = test / 10;
-        ListNode* node2 = new ListNode(test % 10);
-        test = test / 10;
-        ListNode* node3 = new ListNode(test % 10);
-        
-       l5->next = node2;
-        node2->next = node3;
-        node3->next = nullptr;
-        
-        
+        int test = l1val + l2val;
+        ListNode* head = l5;
+        while (test != 0) {
+            ListNode* new_node = new ListNode();
+            l5->val = test % 10;
+            cout << "The value inserted in l5: " << test % 10 << endl << l5->val << endl;
+            l5->next = new_node;
+            test = test / 10;
+        }
+        l5 = head;
+        while (l5 != nullptr) {
+            cout << l5->val << endl;
+             l5 = l5->next;
+        }
+        cout << l1val << endl;
+        cout << l2val << endl;
         
         return l5;
     }
